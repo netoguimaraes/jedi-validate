@@ -292,6 +292,12 @@ You can define your own error messages in case validation fails. In case a form 
         },
         file: {
             filesize: "File is too big"
-        }
+        },
+        email: {
+            email: "Invalid emailId "
+            },
+         extension: {
+            extension: "Invalid file extension make sure your file ends with html, css, txt. extensions."
+         }
     },
 ```
