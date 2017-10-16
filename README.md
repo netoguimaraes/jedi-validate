@@ -12,6 +12,7 @@
   * [Default Options](#default)
   * [Ajax Parameters](#ajax)
   * [Data Encoding Options](#encoding)
+* [Validators](#validators)
 * [Validation Rules](#rules)
 * [Error Message](#error)
 
@@ -192,6 +193,129 @@ Content-Disposition: form-data; name="email"
 
 ```json
     {"name":"111","phone":"222222222","email":"wow@wow.com","file":"index.html"}
+```
+
+<h1>
+  <a name="validators"></a>
+  Validators
+</h1>
+
+#### regexp
+Validate based on a specified regular expression.
+```
+function regexp(value, exp)
+```
+Example:
+```
+regexp('Hello', /^\w+$/) === true
+```
+
+#### email
+Validate that the given input is an email.
+```
+function email(value)
+```
+Example:
+```
+email('ddd@dd.dd') === true
+email('ddddd.dd') === false
+```
+
+#### filesize
+Given a `FileList`, validates that the file size is less than the given size.
+```
+filesize(value, size)
+```
+Example:
+```
+filesize([{ size: 10 }], 20) === true
+```
+
+#### extension
+Validates that the file extension of the given file is of a certain type/value.
+```
+extension(value, extensions)
+```
+Example:
+```
+extension([{ name: 'lol.png' }], 'png|jpg') === true
+```
+
+#### tel
+Validates that the string passed is a telephone number.
+```
+tel(value)
+```
+Example:
+```
+tel('8800123124') === true
+tel('231') === false
+```
+
+#### url
+Validates that the string passed is a URL.
+```
+url(value)
+```
+Example:
+```
+url('http://github.com') === true
+url('231') === false
+```
+
+#### min
+Validates that the given number is larger than min.
+```
+min(value, number)
+```
+Example:
+```
+min(10, 5) === true
+min(1, 5) === false
+```
+
+#### max
+Validates that the given number is smaller than max.
+```
+max(value, number)
+```
+Example:
+```
+max(10, 50) === true
+max(5, 1) === false
+```
+
+#### step
+Validates that the given number is a multiple of another.
+```
+step(value, number)
+```
+Example:
+```
+step(5, 5) === true
+step(5, 12) === false
+```
+
+#### mindate
+Validates that the given date is later than mindate.
+```
+minDate(date, mindate)
+```
+Example:
+```
+minDate(new Date('2017/10/12'), new Date('2017/10/10')) === true
+minDate(new Date('2017/10/12'), new Date('2017/10/13')) === false
+```
+
+#### maxdate
+Validates that the given date is earlier than maxdate.
+```
+maxDate(date, maxdate)
+```
+Example:
+```
+maxDate(new Date('2017/10/12'), new Date('2017/10/12')) === true
+maxDate(new Date('2017/10/12'), new Date('2017/10/10')) === false
 ```
 
 <h1>
