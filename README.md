@@ -12,8 +12,8 @@
   * [Default Options](#default)
   * [Ajax Parameters](#ajax)
   * [Data Encoding Options](#encoding)
-* [Validators](#validators)
 * [Validation Rules](#rules)
+* [Validators](#validators)
 * [Error Message](#error)
 
 
@@ -196,9 +196,66 @@ Content-Disposition: form-data; name="email"
 ```
 
 <h1>
+  <a name="rules"></a>
+  Validation Rules
+</h1>
+
+Rules used to validate input. Each form element will be matched by the 'name' attribute with a corresponding rule, if one exists. If no rule exists, then no validation will occur.
+
+#### Basic Rules:
+
+Rules are not defined by default, but they can be set via attributes or classes in HTML, or in the init options.
+
+> - required :  boolean
+> - regexp : RegExp
+> - email :  boolean
+> - tel :  boolean
+> - url :  boolean
+> - filesize: number
+> - extension: string
+> - min: number
+> - max: number
+> - step: number
+> - minDate: Date
+> - maxDate: Date
+
+
+These attributes can be used
+> - type - email, tel or url (regexp will be used for each type)
+> - pattern - regexp with attribute value
+> - required - check input for empty value
+> - min - min for number and date (ISO) inputs
+> - max - max value for number and date (ISO) inputs
+> - step - step for number and date inputs
+
+Example:
+
+```html
+    <input id="name" type="text" name="name" required class="required">
+    <input id="email" type="email" name="email" class="required">
+    <input id="date" type="date" name="date" min="2011-12-30" class="required">
+    <input id="number" type="number" name="number" min="2" max="20" step="2">
+```
+
+* type="email" or class="email" to validate as email
+* required or class="required" to validate as a required field
+
+#### Custom Validation Rules
+
+You can set your own rules using the ```addMethod``` function:
+
+```
+JediValidate.addMethod('methodName', function (value, options) {
+    return // true if valid
+}, 'Error message');
+```
+
+<h1>
   <a name="validators"></a>
   Validators
 </h1>
+
+Default validation functions that you can use as example of validators.
 
 #### regexp
 Validate based on a specified regular expression.
@@ -318,50 +375,6 @@ maxDate(new Date('2017/10/12'), new Date('2017/10/12')) === true
 maxDate(new Date('2017/10/12'), new Date('2017/10/10')) === false
 ```
 
-<h1>
-  <a name="rules"></a>
-  Validation Rules
-</h1>
-
-Rules used to validate input. Each form element will be matched by the 'name' attribute with a corresponding rule, if one exists. If no rule exists, then no validation will occur.
-
-#### Basic Rules:
-
-Rules are not defined by default, but they can be set via attributes or classes in HTML, or in the init options.
-
-> - required :  boolean
-> - regexp : RegExp
-> - email :  boolean
-> - tel :  boolean
-> - url :  boolean
-> - filesize: number
-> - extension: string
-
-These attributes can be used
-> - type - email, tel or url (regexp will be used for each type)
-> - pattern - regexp with attribute value
-> - required - check input for empty value
-
-Example:
-
-```html
-    <input id="name" type="text" name="name" required class="required">
-    <input id="email" type="email" name="email" class="required">
-```
-
-* type="email" or class="email" to validate as email
-* required or class="required" to validate as a required field
-
-#### Custom Validation Rules
-
-You can set your own rules using the ```addMethod``` function:
-
-```
-JediValidate.addMethod('methodName', function (value, options) {
-    return // true if valid
-}, 'Error message');
-```
-
 ### Initialization Options Example
 
 Add rules as part of your options object when initializing:
@@ -418,10 +431,10 @@ You can define your own error messages in case validation fails. In case a form 
             filesize: "File is too big"
         },
         email: {
-            regexp: "Invalid emailId "
-            },
-         extension: {
-            extension: "Invalid file extension make sure your file ends with html, css, txt. extensions."
-         }
+            regexp: "Invalid email"
+        },
+        extension: {
+            extension: "Invalid file extension make sure your file ends with html, css, txt extensions."
+        }
     },
 ```
