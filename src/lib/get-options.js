@@ -53,6 +53,12 @@ export function getInputRules(input) {
         if (max) rules.max = max;
     }
 
+    if (input.type === 'file') {
+        if (input.hasAttribute('accept') && /\.[(a-z|0-9)]*/.test(input.accept)) {
+            rules.extension = input.accept.substring(1, input.accept.length);
+        }
+    }
+
     if (regexp) rules.regexp = regexp;
     if (step) rules.step = step;
 

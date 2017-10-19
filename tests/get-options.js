@@ -102,5 +102,14 @@ describe('Get options', () => {
                 maxDate: new Date('2019/04/01'),
             });
         });
+
+        it('Should return file input rules', () => {
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', '.csv');
+
+            should(getInputRules(input)).be.deepEqual({
+                extension: 'csv'
+            });
+        });
     });
 });

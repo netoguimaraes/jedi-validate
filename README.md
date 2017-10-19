@@ -218,6 +218,7 @@ Rules are not defined by default, but they can be set via attributes or classes 
 > - step: number
 > - minDate: Date
 > - maxDate: Date
+> - accepts: string
 
 
 These attributes can be used
@@ -235,6 +236,7 @@ Example:
     <input id="email" type="email" name="email" class="required">
     <input id="date" type="date" name="date" min="2011-12-30" class="required">
     <input id="number" type="number" name="number" min="2" max="20" step="2">
+    <input id="file" type="file" name="file" accept=".csv">
 ```
 
 * type="email" or class="email" to validate as email
